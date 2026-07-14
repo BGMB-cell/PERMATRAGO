@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PERMATRAGO - Sistema Documental</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f3f6fa;
+}
+
+header{
+    background:#003366;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:650px;
+    margin:40px auto;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:55px;
+}
+
+h1{
+    color:#003366;
+    text-align:center;
+}
+
+p{
+    text-align:center;
+    color:#555;
+}
+
+button{
+    width:100%;
+    padding:18px;
+    margin-top:18px;
+    font-size:18px;
+    border:none;
+    border-radius:8px;
+    background:#005baa;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#003f77;
+}
+
+#resultado{
+    display:none;
+    text-align:center;
+    margin-top:40px;
+}
+
+.error{
+    color:red;
+    font-size:70px;
+}
+
+.frase{
+    font-size:34px;
+    color:#d00000;
+    font-weight:bold;
+    margin-top:25px;
+}
+
+small{
+    color:#777;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h2>Sistema de Gestión Documental</h2>
+</header>
+
+<div class="container" id="inicio">
+
+<div class="logo">🛢️</div>
+
+<h1>PERMATRAGO®</h1>
+
+<p>
+Repositorio Oficial de Documentos
+</p>
+
+<p>
+Seleccione el documento que desea consultar:
+</p>
+
+<button onclick="mostrar()">
+📘 Instructivo para llenar PERMATRAGO
+</button>
+
+<button onclick="mostrar()">
+📄 Formulario PERMATRAGO
+</button>
+
+</div>
+
+<div class="container" id="resultado">
+
+<div class="error">⚠️</div>
+
+<h2>Documento no disponible</h2>
+
+<p>
+Error 404 - Archivo no encontrado
+</p>
+
+<div class="frase">
+😂 BUSCA QUIEN TE DA...<br>
+Y TE LO TRAGAS 😂
+</div>
+
+<br>
+
+<small>
+PERMATRAGO® v2.0
+</small>
+
+</div>
+
+<script>
+
+function mostrar(){
+
+document.getElementById("inicio").style.display="none";
+document.getElementById("resultado").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
