@@ -3,38 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PERMATRAGO - Sistema Documental</title>
+<title>PERMATRAGO - Sistema de Gestión Documental</title>
 
 <style>
+
 body{
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f3f6fa;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:#eef2f7;
 }
 
 header{
     background:#003366;
     color:white;
-    padding:20px;
+    padding:18px;
     text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.2);
 }
 
 .container{
     max-width:650px;
-    margin:40px auto;
+    margin:45px auto;
     background:white;
     padding:35px;
     border-radius:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
 }
 
 .logo{
     font-size:55px;
+    text-align:center;
 }
 
-h1{
-    color:#003366;
+h1,h2{
     text-align:center;
+    color:#003366;
 }
 
 p{
@@ -42,44 +45,72 @@ p{
     color:#555;
 }
 
+input[type=date]{
+    width:100%;
+    padding:14px;
+    font-size:18px;
+    margin-top:20px;
+    border-radius:8px;
+    border:1px solid #bbb;
+    box-sizing:border-box;
+}
+
 button{
     width:100%;
-    padding:18px;
-    margin-top:18px;
+    margin-top:20px;
+    padding:16px;
     font-size:18px;
-    border:none;
-    border-radius:8px;
     background:#005baa;
     color:white;
+    border:none;
+    border-radius:8px;
     cursor:pointer;
     transition:.3s;
 }
 
 button:hover{
-    background:#003f77;
+    background:#004080;
 }
 
-#resultado{
-    display:none;
+#errorFecha{
+    color:red;
     text-align:center;
-    margin-top:40px;
+    margin-top:15px;
+    display:none;
+}
+
+#documentos,#resultado{
+    display:none;
 }
 
 .error{
-    color:red;
     font-size:70px;
 }
 
 .frase{
+    color:#d10000;
     font-size:34px;
-    color:#d00000;
     font-weight:bold;
     margin-top:25px;
+}
+
+.beer{
+    width:220px;
+    margin-top:30px;
+    border-radius:12px;
+}
+
+.nota{
+    margin-top:20px;
+    font-size:13px;
+    color:#777;
+    font-style:italic;
 }
 
 small{
     color:#777;
 }
+
 </style>
 
 </head>
@@ -87,36 +118,66 @@ small{
 <body>
 
 <header>
-<h2>Sistema de Gestión Documental</h2>
+
+<h2>🛢️ Sistema de Gestión Documental</h2>
+
 </header>
 
-<div class="container" id="inicio">
+<!-- PANTALLA 1 -->
+
+<div class="container" id="fecha">
 
 <div class="logo">🛢️</div>
 
 <h1>PERMATRAGO®</h1>
 
-<p>
-Repositorio Oficial de Documentos
-</p>
+<p><b>Validación de Acceso</b></p>
 
 <p>
-Seleccione el documento que desea consultar:
+Seleccione la fecha actual para continuar.
 </p>
 
-<button onclick="mostrar()">
+<input type="date" id="fechaActual">
+
+<div id="errorFecha">
+⚠️ Debe seleccionar la fecha de hoy para continuar.
+</div>
+
+<button onclick="validarFecha()">
+Siguiente
+</button>
+
+</div>
+
+<!-- PANTALLA 2 -->
+
+<div class="container" id="documentos">
+
+<div class="logo">📂</div>
+
+<h1>Repositorio Documental</h1>
+
+<p>
+Seleccione el documento que desea consultar.
+</p>
+
+<button onclick="mostrarResultado()">
 📘 Instructivo para llenar PERMATRAGO
 </button>
 
-<button onclick="mostrar()">
+<button onclick="mostrarResultado()">
 📄 Formulario PERMATRAGO
 </button>
 
 </div>
 
+<!-- PANTALLA 3 -->
+
 <div class="container" id="resultado">
 
-<div class="error">⚠️</div>
+<div class="error">
+⚠️
+</div>
 
 <h2>Documento no disponible</h2>
 
@@ -125,27 +186,72 @@ Error 404 - Archivo no encontrado
 </p>
 
 <div class="frase">
+
 😂 BUSCA QUIEN TE DA...<br>
 Y TE LO TRAGAS 😂
+
 </div>
-    
-<p style="font-size:12px; color:gray; margin-top:20px;">
-😏 Mal pensados...
+
+<img src="cerveza.png" class="beer">
+
+<p class="nota">
+
+😏 ¡Mal pensados!... hablábamos del vaso de cerveza 🍺
+
 </p>
-    
-<br>
 
 <small>
+
 PERMATRAGO® v2.0
+
 </small>
 
 </div>
 
 <script>
 
-function mostrar(){
+window.onload=function(){
 
-document.getElementById("inicio").style.display="none";
+const hoy=new Date();
+
+let dia=hoy.getDate().toString().padStart(2,'0');
+let mes=(hoy.getMonth()+1).toString().padStart(2,'0');
+let anio=hoy.getFullYear();
+
+let fecha=anio+"-"+mes+"-"+dia;
+
+document.getElementById("fechaActual").value=fecha;
+
+}
+
+function validarFecha(){
+
+const hoy=new Date();
+
+let dia=hoy.getDate().toString().padStart(2,'0');
+let mes=(hoy.getMonth()+1).toString().padStart(2,'0');
+let anio=hoy.getFullYear();
+
+let fechaHoy=anio+"-"+mes+"-"+dia;
+
+let seleccion=document.getElementById("fechaActual").value;
+
+if(seleccion===fechaHoy){
+
+document.getElementById("fecha").style.display="none";
+document.getElementById("documentos").style.display="block";
+
+}else{
+
+document.getElementById("errorFecha").style.display="block";
+
+}
+
+}
+
+function mostrarResultado(){
+
+document.getElementById("documentos").style.display="none";
 document.getElementById("resultado").style.display="block";
 
 }
